@@ -1,0 +1,11 @@
+C:\Users\chaoddny\Dropbox\MediaOcean\mongoDB\playground\spring-cloud-ping-pong-sample-master\sample-ping\src\main\java\org\bk\consumer\PingApplication.java
+C:\Users\chaoddny\Dropbox\MediaOcean\mongoDB\playground\spring-cloud-ping-pong-sample-master\sample-ping\src\main\java\org\bk\consumer\ribbon\RestTemplateDirectPongClient.java
+C:\Users\chaoddny\Dropbox\MediaOcean\mongoDB\playground\spring-cloud-ping-pong-sample-master\sample-ping\src\main\java\org\bk\noscan\consumer\ribbon\PongDirectCallRibbonConfiguration.java
+C:\Users\chaoddny\Dropbox\MediaOcean\mongoDB\playground\spring-cloud-ping-pong-sample-master\sample-ping\src\main\java\org\bk\consumer\ribbon\RibbonDirectPongClient.java
+C:\Users\chaoddny\Dropbox\MediaOcean\mongoDB\playground\spring-cloud-ping-pong-sample-master\sample-ping\src\main\java\org\bk\consumer\config\RootConfiguration.java
+C:\Users\chaoddny\Dropbox\MediaOcean\mongoDB\playground\spring-cloud-ping-pong-sample-master\sample-ping\src\main\java\org\bk\consumer\domain\MessageAcknowledgement.java
+C:\Users\chaoddny\Dropbox\MediaOcean\mongoDB\playground\spring-cloud-ping-pong-sample-master\sample-ping\src\main\java\org\bk\consumer\feign\PongClient.java
+C:\Users\chaoddny\Dropbox\MediaOcean\mongoDB\playground\spring-cloud-ping-pong-sample-master\sample-ping\src\main\java\org\bk\consumer\domain\Message.java
+C:\Users\chaoddny\Dropbox\MediaOcean\mongoDB\playground\spring-cloud-ping-pong-sample-master\sample-ping\src\main\java\org\bk\consumer\controller\PingController.java
+C:\Users\chaoddny\Dropbox\MediaOcean\mongoDB\playground\spring-cloud-ping-pong-sample-master\sample-ping\src\main\java\org\bk\consumer\ribbon\RibbonEurekaPongClient.java
+C:\Users\chaoddny\Dropbox\MediaOcean\mongoDB\playground\spring-cloud-ping-pong-sample-master\sample-ping\src\main\java\org\bk\consumer\service\HystrixWrappedPongClient.java
