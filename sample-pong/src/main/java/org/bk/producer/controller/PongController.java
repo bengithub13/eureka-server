@@ -1,6 +1,7 @@
 package org.bk.producer.controller;
 
 
+import org.bk.producer.domain.Message;
 import org.bk.producer.domain.MessageAcknowledgement;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.hateoas.Resource;
@@ -23,10 +24,14 @@ public class PongController {
 
     @RequestMapping(value = "/message", method = RequestMethod.POST)
   public Resource<MessageAcknowledgement> pongMessage(@RequestBody String input) {
-    	System.out.println("Pong received it");
     	return new Resource<>(
               new MessageAcknowledgement("1", "ROGER THAT", "${reply.message}"));
   }
 
+    
+    @RequestMapping(value = "/randomMessage", method = RequestMethod.GET)
+  public Message randomMessage() {
+    	return new Message("Random");
+  }
 
 }

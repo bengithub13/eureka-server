@@ -1,5 +1,6 @@
 package org.bk.producer.domain;
 
+import java.util.concurrent.atomic.AtomicInteger;
 
 public class Message {
     private String id;
@@ -8,13 +9,20 @@ public class Message {
     public Message() {
 
     }
+    
+    public static final AtomicInteger index = new AtomicInteger();
 
     public Message(String id, String payload) {
-        this.id = id;
+        this.id = String.valueOf(index.incrementAndGet());
         this.payload = payload;
     }
 
-    public String getId() {
+    public Message(String message) {
+        this.id = String.valueOf(index.incrementAndGet());
+        this.payload = message;
+    }
+
+	public String getId() {
         return id;
     }
 
