@@ -1,9 +1,9 @@
 Manifest-Version: 1.0
 Implementation-Title: spring-rest-template
 Implementation-Version: 0.0.1-SNAPSHOT
-Built-By: Sean
+Built-By: chaoddny
 Implementation-Vendor-Id: net.sean.practice
-Build-Jdk: 1.8.0_45
+Build-Jdk: 1.8.0_31
 Created-By: Maven Integration for Eclipse
 Implementation-Vendor: Pivotal Software, Inc.
 
