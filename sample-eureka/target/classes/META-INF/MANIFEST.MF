@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 Manifest-Version: 1.0
 Implementation-Title: sample-eureka
 Implementation-Version: 1.0.0-SNAPSHOT
@@ -8,3 +9,15 @@ Created-By: Maven Integration for Eclipse
 Implementation-Vendor: Pivotal Software, Inc.
 Main-Class: org.bk.eureka.EurekaApplication
 
+=======
+Manifest-Version: 1.0
+Implementation-Title: eureka server
+Implementation-Version: 1.0.0-SNAPSHOT
+Built-By: BenPoon
+Implementation-Vendor-Id: org.testboot
+Build-Jdk: 1.8.0_65
+Created-By: Maven Integration for Eclipse
+Implementation-Vendor: Pivotal Software, Inc.
+Main-Class: org.bk.eureka.EurekaApplication
+
+>>>>>>> 5eb9f9e34c465c00717e4ce5add53697f5e457d1
