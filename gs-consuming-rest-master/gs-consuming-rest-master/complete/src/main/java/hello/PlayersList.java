@@ -5,18 +5,18 @@ import java.util.List;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 
 @JsonIgnoreProperties(ignoreUnknown = true)
-public class Players {
+public class PlayersList {
 
-    private List<String> players;
+    private List<Player> players;
 
-    public Players() {
+    public PlayersList() {
     }
 
-    public List<String> getPlayers() {
+    public List<Player> getPlayers() {
 		return players;
 	}
 
-	public void setPlayers(List<String> players) {
+	public void setPlayers(List<Player> players) {
 		this.players = players;
 	}
 

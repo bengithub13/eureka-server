@@ -37,23 +37,23 @@ public class Application implements CommandLineRunner {
 //        log.info(quote.toString());
         
         MappingJackson2HttpMessageConverter converter = new MappingJackson2HttpMessageConverter();
-        converter.setSupportedMediaTypes(Collections.singletonList(MediaType.ALL));
+        converter.setSupportedMediaTypes(Collections.singletonList(MediaType.TEXT_PLAIN));
         restTemplate.getMessageConverters().add(converter);
-//        PlayerResponse response = restTemplate.getForObject(url, PlayerResponse.class);
         Map<String, String> urlVars = new HashMap<>();
         urlVars.put("response_format", "json");
         urlVars.put("league_id", "rfbl2006");
         urlVars.put("access_token", "U2FsdGVkX19BVwDZpqNniJCnM_ntdhIDEMxocrKfZZmStWp1gZx_cNpskKVCGmnyW8rPLq8BycfdaeuTb-RZVd-usGsHdpIBVuzCWuIIdfhn53O-WDcIegvMY_FN5c5D");
-        urlVars.put("name", "brian\\+mccann");
+        urlVars.put("name", "brian mccann");
         urlVars.put("eligible_only", "0");
         urlVars.put("version", "3.0");
         urlVars.put("free_agents_only", "1");
         
-        String response = restTemplate.getForObject(url, String.class, urlVars);
+        PlayerResponse response = restTemplate.getForObject(url, PlayerResponse.class, urlVars);
+//        String response = restTemplate.getForObject(url, String.class, urlVars);
         System.out.println(response);
 
-//        log.info(response.getBody().getPlayers()[0].toString());
+        log.info(response.getBody().getPlayers().get(0).toString());
 //        log.info(response.getStatusMessage() + response.getBody());
-        log.info(response);
+//        log.info(response);
     }
 }

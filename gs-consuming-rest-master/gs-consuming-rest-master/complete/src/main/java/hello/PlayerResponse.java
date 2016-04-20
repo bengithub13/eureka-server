@@ -1,14 +1,11 @@
 package hello;
 
-import java.util.List;
-import java.util.Map;
-
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 
 @JsonIgnoreProperties(ignoreUnknown = true)
 public class PlayerResponse {
 
-    private Map<String, List<Player>> body;
+    private PlayersList body;
     private String statusMessage;
 
     public String getStatusMessage() {
@@ -22,11 +19,11 @@ public class PlayerResponse {
 	public PlayerResponse() {
     }
 
-    public Map<String, List<Player>> getBody() {
+    public PlayersList getBody() {
         return body;
     }
 
-    public void setBody(Map<String, List<Player>> body) {
+    public void setBody(PlayersList body) {
         this.body = body;
     }
 
