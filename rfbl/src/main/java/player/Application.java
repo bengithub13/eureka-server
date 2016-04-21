@@ -22,6 +22,7 @@ public class Application implements CommandLineRunner {
     @Value("${access_token}")
     private String access_token;
     
+    
     @Value("${name}")
     private String name;
     
