@@ -1,26 +1,36 @@
-package player;
+package searcher;
 
-import java.net.URI;
-import java.net.URISyntaxException;
-import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
+import org.springframework.context.annotation.ComponentScan;
 import org.springframework.http.MediaType;
 import org.springframework.http.converter.json.MappingJackson2HttpMessageConverter;
+import org.springframework.stereotype.Component;
 import org.springframework.web.client.RestTemplate;
 import org.springframework.web.util.UriComponentsBuilder;
 
+import parsers.Baseball_America_2016_Parser;
+import parsers.MLB_2016;
+import parsers.Parser;
+import player.PlayerRepository;
+import player.PlayerResponse;
+
 @SpringBootApplication
+@ComponentScan(basePackages = {"player"})
 public class PlayerSearcher implements CommandLineRunner {
 
-    private static final Logger log = LoggerFactory.getLogger(PlayerSearcher.class);
+    @Autowired()
+    private PlayerRepository playerRepository;
+	
+	private static final Logger log = LoggerFactory.getLogger(PlayerSearcher.class);
     
     @Value("${access_token}")
     private String access_token;
@@ -33,9 +43,9 @@ public class PlayerSearcher implements CommandLineRunner {
 
     @Override
     public void run(String... args) throws Exception {
-    	List<String> players = new ArrayList<String>();
-    	players.add("jose altuve");
-    	players.add("a.j reed");
+//    	Parser parser1 = new Baseball_America_2016_Parser("baseballamerica2016.txt");
+    	Parser parser2 = new MLB_2016("mlb2016.txt");
+    	List<String> players = parser2.getPlayers();
     	search(players);
     }
     
@@ -49,16 +59,22 @@ public class PlayerSearcher implements CommandLineRunner {
      		.queryParam("response_format", "json")
         .queryParam("league_id", "rfbl2006")
         .queryParam("access_token",access_token)
-        .queryParam("name", "altuve")
+        .queryParam("name", "corey seager")
         .queryParam("eligible_only", "0")
         .queryParam("version", "3.0")
         .queryParam("free_agents_only", "1");
         
-        players.stream()
+        players
         	.forEach(p -> {
-        			builder.replaceQueryParam("name", p);
-        			PlayerResponse response = restTemplate.getForObject(builder.build().encode().toUri(), PlayerResponse.class);
-        			log.info(response.getBody().getPlayers().get(0).toString());
+        			builder.replaceQueryParam("name", p.trim());
+//        			System.out.println(builder.build().toUriString());
+        			PlayerResponse response = restTemplate.getForObject(builder.build().toUriString(), PlayerResponse.class);
+        			if (response.getBody().getPlayers().isEmpty()){
+        				log.info("***" + p + " was not found");
+        			}else{
+        				System.out.println(response.getBody().getPlayers().get(0).toString());
+        				playerRepository.save(response.getBody().getPlayers().get(0));
+        			}
         	});
 
     	

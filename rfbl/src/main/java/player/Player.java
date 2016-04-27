@@ -1,10 +1,16 @@
 package player;
 
+import java.util.Arrays;
+
+import javax.annotation.Resource;
+
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 
 @JsonIgnoreProperties(ignoreUnknown = true)
 public class Player {
 
+	@Resource(name="elias_id")
+	private String id;
 	private String firstname;
 	private String lastname;
 	private String fullname;
@@ -22,7 +28,15 @@ public class Player {
 		this.lastname = lastname;
 	}
 	
-    public String getFirstname() {
+    public String getId() {
+		return id;
+	}
+
+	public void setId(String id) {
+		this.id = id;
+	}
+
+	public String getFirstname() {
 		return firstname;
 	}
 
@@ -87,10 +101,10 @@ public class Player {
 	}
 
 	@Override
-    public String toString() {
-        return "Player{" +
-                "firstname=" + firstname +
-                ", lastname='" + lastname + '\'' +
-                '}';
-    }
+	public String toString() {
+		return "Player [fullname=" + fullname + ", fantasy_team_name=" + fantasy_team_name + ", free_agent="
+				+ free_agent + ", eligible_positions=" + Arrays.toString(eligible_positions) + "]";
+	}
+
+	
 }
