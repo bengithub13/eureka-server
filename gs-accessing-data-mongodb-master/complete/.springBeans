@@ -9,7 +9,6 @@
 	<configs>
 	</configs>
 	<autoconfigs>
-		<config>java:player.PlayerSearcher</config>
 	</autoconfigs>
 	<configSets>
 	</configSets>

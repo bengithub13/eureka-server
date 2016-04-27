@@ -1,4 +1,4 @@
-package player;
+package player.domain;
 
 import java.util.List;
 

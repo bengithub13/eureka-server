@@ -5,6 +5,9 @@ import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 
+import hello.repository.Customer;
+import hello.repository.CustomerRepository;
+
 @SpringBootApplication
 public class Application implements CommandLineRunner {
 

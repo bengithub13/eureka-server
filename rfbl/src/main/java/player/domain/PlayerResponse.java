@@ -1,4 +1,4 @@
-package player;
+package player.domain;
 
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 

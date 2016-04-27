@@ -1,7 +1,8 @@
-package searcher;
+package player;
 
 import java.util.Collections;
 import java.util.List;
+import java.util.stream.Collectors;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -10,21 +11,20 @@ import org.springframework.beans.factory.annotation.Value;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
-import org.springframework.context.annotation.ComponentScan;
 import org.springframework.http.MediaType;
 import org.springframework.http.converter.json.MappingJackson2HttpMessageConverter;
-import org.springframework.stereotype.Component;
 import org.springframework.web.client.RestTemplate;
 import org.springframework.web.util.UriComponentsBuilder;
 
-import parsers.Baseball_America_2016_Parser;
-import parsers.MLB_2016;
-import parsers.Parser;
-import player.PlayerRepository;
-import player.PlayerResponse;
+import player.domain.Player;
+import player.domain.PlayerRepository;
+import player.domain.PlayerResponse;
+import player.logger.PlayerLogger;
+import player.parsers.Baseball_America_2016_Parser;
+import player.parsers.MLB_2016;
+import player.parsers.Parser;
 
 @SpringBootApplication
-@ComponentScan(basePackages = {"player"})
 public class PlayerSearcher implements CommandLineRunner {
 
     @Autowired()
@@ -43,13 +43,13 @@ public class PlayerSearcher implements CommandLineRunner {
 
     @Override
     public void run(String... args) throws Exception {
-//    	Parser parser1 = new Baseball_America_2016_Parser("baseballamerica2016.txt");
-    	Parser parser2 = new MLB_2016("mlb2016.txt");
-    	List<String> players = parser2.getPlayers();
+    	Parser parser1 = new Baseball_America_2016_Parser("baseballamerica2016.txt");
+//    	Parser parser2 = new MLB_2016("mlb2016.txt");
+    	List<Player> players = parser1.getPlayers();
     	search(players);
     }
     
-    public void search(List<String> players){
+    public void search(List<Player> players){
         RestTemplate restTemplate = new RestTemplate();
         
         MappingJackson2HttpMessageConverter converter = new MappingJackson2HttpMessageConverter();
@@ -66,13 +66,13 @@ public class PlayerSearcher implements CommandLineRunner {
         
         players
         	.forEach(p -> {
-        			builder.replaceQueryParam("name", p.trim());
+        			builder.replaceQueryParam("name", p.getFullname().trim());
 //        			System.out.println(builder.build().toUriString());
         			PlayerResponse response = restTemplate.getForObject(builder.build().toUriString(), PlayerResponse.class);
         			if (response.getBody().getPlayers().isEmpty()){
-        				log.info("***" + p + " was not found");
+        				PlayerLogger.log(p + " was not found");
         			}else{
-        				System.out.println(response.getBody().getPlayers().get(0).toString());
+        				PlayerLogger.log(response.getBody().getPlayers().get(0).toString());
         				playerRepository.save(response.getBody().getPlayers().get(0));
         			}
         	});

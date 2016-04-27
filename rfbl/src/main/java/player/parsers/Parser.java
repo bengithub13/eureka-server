@@ -1,6 +1,8 @@
-package parsers;
+package player.parsers;
 
 import java.util.List;
+
+import player.domain.Player;
 
 public abstract class Parser {
 
@@ -12,7 +14,7 @@ public abstract class Parser {
 		this.file = file;
 	}
 	
-	public abstract List<String> getPlayers();
+	public abstract List<Player> getPlayers();
 
 	public String getFile() {
 		return file;

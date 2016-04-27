@@ -1,15 +1,22 @@
-package player;
+package player.domain;
 
 import java.util.Arrays;
 
 import javax.annotation.Resource;
 
+import org.springframework.data.annotation.Id;
+
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+
+import player.exceptions.MLBTeamNotFoundException;
+import player.exceptions.PositionNotFoundException;
+import player.logger.PlayerLogger;
 
 @JsonIgnoreProperties(ignoreUnknown = true)
 public class Player {
 
 	@Resource(name="elias_id")
+	@Id
 	private String id;
 	private String firstname;
 	private String lastname;
@@ -19,6 +26,8 @@ public class Player {
 	private String fantasy_team_name;
 	private boolean free_agent;
 	private String[] eligible_positions;
+	transient private MLBTeam mlbTeam;
+	transient private Position pos;
 	
 	public Player(){
 	}
@@ -66,6 +75,11 @@ public class Player {
 
 	public void setPosition(String position) {
 		this.position = position;
+		try{
+			pos = Position.getPosition(position);
+		}catch(PositionNotFoundException e){
+			PlayerLogger.log(e.getMessage());
+		}
 	}
 
 	public String getPro_team() {
@@ -74,6 +88,11 @@ public class Player {
 
 	public void setPro_team(String pro_team) {
 		this.pro_team = pro_team;
+		try{
+			this.mlbTeam = MLBTeam.getMLBTeam(pro_team);
+		}catch(MLBTeamNotFoundException e){
+			PlayerLogger.log(e.getMessage());
+		}
 	}
 
 	public String getFantasy_team_name() {
@@ -100,9 +119,27 @@ public class Player {
 		this.eligible_positions = eligible_positions;
 	}
 
+	public MLBTeam getMlbTeam() {
+		return mlbTeam;
+	}
+
+	public void setMlbTeam(MLBTeam mlbTeam) {
+		this.mlbTeam = mlbTeam;
+	}
+
+	public Position getPos() {
+		return pos;
+	}
+
+	public void setPos(Position pos) {
+		this.pos = pos;
+	}
+
 	@Override
 	public String toString() {
-		return "Player [fullname=" + fullname + ", fantasy_team_name=" + fantasy_team_name + ", free_agent="
+		return "Player [fullname=" + fullname + ", fantasy_team_name=" + fantasy_team_name 
+				+ ", mlb_team=" + pro_team
+				+ ", free_agent="
 				+ free_agent + ", eligible_positions=" + Arrays.toString(eligible_positions) + "]";
 	}
 
