@@ -17,10 +17,10 @@ public enum MLBTeam {
 	FLA(new String[]{"Florida ","Marlins ","FLA","Florida  Marlins "}),
 	HOU(new String[]{"Houston ","Astros ","HOU","Houston  Astros "}),
 	KC(new String[]{"KC","Kansas City","Royals","KAN","Kansas City Royals"}),
-	LAA(new String[]{"Los Angeles","Angeles ","LAA","Los Angeles Angeles "}),
+	LAA(new String[]{"Los Angeles","Angeles","LAA","Los Angeles Angeles "}),
 	LAD(new String[]{"Los Angeles","Dodgers","LAD","Los Angeles Dodgers"}),
-	MIL(new String[]{"Milwaukee ","Brewers ","MIL","Milwaukee  Brewers "}),
-	MIN(new String[]{"Minnesota ","Twins ","MIN","Minnesota  Twins "}),
+	MIL(new String[]{"Milwaukee ","Brewers","MIL","Milwaukee  Brewers "}),
+	MIN(new String[]{"Minnesota ","Twins","MIN","Minnesota  Twins "}),
 	NYM(new String[]{"New York","Mets","NYM","New York Mets"}),
 	NYY(new String[]{"New York","Yankees","NYY","New York Yankees"}),
 	OAK(new String[]{"Oakland ","Athletics ","OAK","Oakland  Athletics "}),
@@ -45,7 +45,7 @@ public enum MLBTeam {
 		
 		for (MLBTeam mlbTeam : values()){
 			for (String s : mlbTeam.names){
-				if (s.equalsIgnoreCase(team))
+				if (s.trim().equalsIgnoreCase(team.trim()))
 					return mlbTeam;
 			}
 		}

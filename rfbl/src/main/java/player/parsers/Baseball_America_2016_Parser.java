@@ -53,11 +53,11 @@ public class Baseball_America_2016_Parser extends Parser{
 				player.setFullname(sb.toString());
 				player.setEligible_positions(playerLine.split(",")[1].split("/"));
 				try {
-					player.setPos(Position.getPosition(player.getEligible_positions()[0]));
+					player.setPos(Position.getPosition(player.getEligible_positions()[0].trim()));
 				}catch(PositionNotFoundException p){
 					PlayerLogger.log(p.getMessage());
 				}
-				player.setPro_team(playerLine.split(",")[2]);
+				player.setPro_team(playerLine.split("[,\"]")[3].trim());
 				try {
 					MLBTeam.getMLBTeam(player.getPro_team());
 				}catch(MLBTeamNotFoundException p){
