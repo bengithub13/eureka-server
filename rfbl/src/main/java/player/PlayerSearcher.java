@@ -1,8 +1,8 @@
 package player;
 
+import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
-import java.util.stream.Collectors;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -21,8 +21,8 @@ import player.domain.PlayerRepository;
 import player.domain.PlayerResponse;
 import player.logger.PlayerLogger;
 import player.parsers.Baseball_America_2016_Parser;
-import player.parsers.MLB_2016;
 import player.parsers.Parser;
+import player.utils.ResourceRankPair;
 
 @SpringBootApplication
 public class PlayerSearcher implements CommandLineRunner {
@@ -43,9 +43,18 @@ public class PlayerSearcher implements CommandLineRunner {
 
     @Override
     public void run(String... args) throws Exception {
-    	Parser parser1 = new Baseball_America_2016_Parser("baseballamerica2016.txt");
-//    	Parser parser2 = new MLB_2016("mlb2016.txt");
+    	String url = "baseballamerica2016.txt";
+    	Parser parser1 = new Baseball_America_2016_Parser(url);
     	List<Player> players = parser1.getPlayers();
+    	for (int i = 0; i < players.size(); i++){
+    		List<ResourceRankPair> mentions = players.get(i).getMentions();
+    		if (mentions == null) {
+    			mentions = new ArrayList<ResourceRankPair>();
+    			players.get(i).setMentions(mentions);
+    		}
+    		mentions.add(new ResourceRankPair(url, i));
+    	}
+    	//    	Parser parser2 = new MLB_2016("mlb2016.txt");
     	search(players);
     }
     
