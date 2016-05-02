@@ -1,6 +1,7 @@
 package player.domain;
 
 import java.util.Arrays;
+import java.util.List;
 
 import javax.annotation.Resource;
 
@@ -11,6 +12,7 @@ import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import player.exceptions.MLBTeamNotFoundException;
 import player.exceptions.PositionNotFoundException;
 import player.logger.PlayerLogger;
+import player.utils.ResourceRankPair;
 
 @JsonIgnoreProperties(ignoreUnknown = true)
 public class Player {
@@ -26,6 +28,7 @@ public class Player {
 	private String fantasy_team_name;
 	private boolean free_agent;
 	private String[] eligible_positions;
+	private List<ResourceRankPair> mentions; 
 	transient private MLBTeam mlbTeam;
 	transient private Position pos;
 	
@@ -133,6 +136,14 @@ public class Player {
 
 	public void setPos(Position pos) {
 		this.pos = pos;
+	}
+
+	public List<ResourceRankPair> getMentions() {
+		return mentions;
+	}
+
+	public void setMentions(List<ResourceRankPair> mentions) {
+		this.mentions = mentions;
 	}
 
 	@Override
