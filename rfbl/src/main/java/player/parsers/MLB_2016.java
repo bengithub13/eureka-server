@@ -23,8 +23,7 @@ public class MLB_2016 extends Parser{
 	}
 	
 	@Override
-	public List<Player> getPlayers() {
-		List<Player> players = new ArrayList<Player>();
+	public void parsePlayers() {
 		List<String> lines = new ArrayList<>();
 		File file = new File(getClass().getClassLoader().getResource(getFile()).getFile());
 		try (Stream<String> stream = Files.lines(Paths.get(file.getAbsolutePath()))) {
@@ -39,12 +38,12 @@ public class MLB_2016 extends Parser{
 					.collect(Collectors.toList());
 			StringBuilder sb = null;
 			for (String playerLine : lines){
-				Player player = new Player();
 				sb = new StringBuilder();
 				Matcher m = pattern.matcher(playerLine);
 				while (m.find()){
 					sb.append(m.group()).append(" ");
 				}
+				Player player = playerFactory.getPlayer();
 				player.setFullname(sb.toString().trim());
 				players.add(player);
 			}
@@ -52,7 +51,6 @@ public class MLB_2016 extends Parser{
 		} catch (IOException e) {
 			e.printStackTrace();
 		}
-		return players;
 	}
 
 }
