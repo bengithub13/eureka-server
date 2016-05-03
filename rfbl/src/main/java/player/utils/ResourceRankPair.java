@@ -2,11 +2,30 @@ package player.utils;
 
 public class ResourceRankPair {
 
-	String resourceUrl;
-	int rank;
+	private String resourceUrl;
+	private int rank;
 	
-	public ResourceRankPair(String u, int i){
-		resourceUrl = u;
-		rank = i;
+	public ResourceRankPair(String resourceUrl, int rank){
+		this.resourceUrl = resourceUrl;
+		this.rank = rank;
 	}
+
+	public String getResourceUrl() {
+		return resourceUrl;
+	}
+
+	public void setResourceUrl(String resourceUrl) {
+		this.resourceUrl = resourceUrl;
+	}
+
+	public int getRank() {
+		return rank;
+	}
+
+	public void setRank(int rank) {
+		this.rank = rank;
+	}
+
+
+
 }

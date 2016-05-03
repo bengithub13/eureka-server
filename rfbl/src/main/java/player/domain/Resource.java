@@ -11,6 +11,7 @@ public class Resource {
 
 	private String site;
 	private String date;
+	
 	public String getSite() {
 		return site;
 	}

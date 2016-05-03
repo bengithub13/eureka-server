@@ -50,7 +50,7 @@ public class Baseball_America_2016_Parser extends Parser{
 				while (m.find()){
 					sb.append(m.group()).append(" ");
 				}
-				player.setFullname(sb.toString());
+				player.setFullname(sb.toString().trim());
 				player.setEligible_positions(playerLine.split(",")[1].split("/"));
 				try {
 					player.setPos(Position.getPosition(player.getEligible_positions()[0].trim()));

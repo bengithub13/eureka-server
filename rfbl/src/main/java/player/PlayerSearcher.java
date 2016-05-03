@@ -21,6 +21,7 @@ import player.domain.PlayerRepository;
 import player.domain.PlayerResponse;
 import player.logger.PlayerLogger;
 import player.parsers.Baseball_America_2016_Parser;
+import player.parsers.MLB_2016;
 import player.parsers.Parser;
 import player.utils.ResourceRankPair;
 
@@ -43,8 +44,11 @@ public class PlayerSearcher implements CommandLineRunner {
 
     @Override
     public void run(String... args) throws Exception {
-    	String url = "baseballamerica2016.txt";
-    	Parser parser1 = new Baseball_America_2016_Parser(url);
+//    	String url = "baseballamerica2016.txt";
+    	String url = "mlb2016.txt";
+
+//    	Parser parser1 = new Baseball_America_2016_Parser(url);
+    	Parser parser1 = new MLB_2016(url);
     	List<Player> players = parser1.getPlayers();
     	for (int i = 0; i < players.size(); i++){
     		List<ResourceRankPair> mentions = players.get(i).getMentions();
@@ -54,8 +58,10 @@ public class PlayerSearcher implements CommandLineRunner {
     		}
     		mentions.add(new ResourceRankPair(url, i));
     	}
-    	//    	Parser parser2 = new MLB_2016("mlb2016.txt");
     	search(players);
+//    	url = "mlb2016.txt";
+//    	Parser parser2 = new MLB_2016(url);
+//    	search(players);
     }
     
     public void search(List<Player> players){
@@ -81,8 +87,20 @@ public class PlayerSearcher implements CommandLineRunner {
         			if (response.getBody().getPlayers().isEmpty()){
         				PlayerLogger.log(p + " was not found");
         			}else{
-        				PlayerLogger.log(response.getBody().getPlayers().get(0).toString());
-        				playerRepository.save(response.getBody().getPlayers().get(0));
+        				for (Player p2 : response.getBody().getPlayers()){
+        					if (p.equals(p2)){
+        						Player p3 = playerRepository.findById(p2.getId());
+        						if (p3 != null) p2 = p3;
+        						if (p2.getMentions() != null && !p2.getMentions().isEmpty()){
+        							p2.getMentions().addAll(p.getMentions());
+        						}else{
+        							p2.setMentions(p.getMentions());
+        						}
+//        						PlayerLogger.log(p2.toString());
+        						playerRepository.save(p2);
+        						break;
+        					}
+        				}
         			}
         	});
 

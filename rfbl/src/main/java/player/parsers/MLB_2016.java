@@ -11,6 +11,8 @@ import java.util.regex.Pattern;
 import java.util.stream.Collectors;
 import java.util.stream.Stream;
 
+import player.domain.Player;
+
 public class MLB_2016 extends Parser{
 
 	public MLB_2016() {
@@ -21,8 +23,8 @@ public class MLB_2016 extends Parser{
 	}
 	
 	@Override
-	public List<String> getPlayers() {
-		List<String> players = new ArrayList<String>();
+	public List<Player> getPlayers() {
+		List<Player> players = new ArrayList<Player>();
 		List<String> lines = new ArrayList<>();
 		File file = new File(getClass().getClassLoader().getResource(getFile()).getFile());
 		try (Stream<String> stream = Files.lines(Paths.get(file.getAbsolutePath()))) {
@@ -36,13 +38,15 @@ public class MLB_2016 extends Parser{
 //					.map(String::toUpperCase).
 					.collect(Collectors.toList());
 			StringBuilder sb = null;
-			for (String player : lines){
+			for (String playerLine : lines){
+				Player player = new Player();
 				sb = new StringBuilder();
-				Matcher m = pattern.matcher(player);
+				Matcher m = pattern.matcher(playerLine);
 				while (m.find()){
 					sb.append(m.group()).append(" ");
 				}
-				players.add(sb.toString());
+				player.setFullname(sb.toString().trim());
+				players.add(player);
 			}
 
 		} catch (IOException e) {
