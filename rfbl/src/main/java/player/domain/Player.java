@@ -176,6 +176,11 @@ public class Player {
 				return false;
 		} else if (!fullname.equalsIgnoreCase(other.fullname))
 			return false;
+		if (mlbTeam == null){
+			if (other.mlbTeam != null)
+				return false;
+		}else if (!mlbTeam.equals(other.mlbTeam))
+				return false;
 		return true;
 	}
 	
