@@ -1,9 +1,10 @@
 Manifest-Version: 1.0
-Implementation-Title: sample-config
-Implementation-Version: 1.0.0-SNAPSHOT
-Built-By: chaoddny
-Implementation-Vendor-Id: org.bk
-Build-Jdk: 1.8.0_31
+Implementation-Title: config-server
+Implementation-Version: 0.0.1-SNAPSHOT
+Built-By: BenPoon
+Implementation-Vendor-Id: org.testboot
+Build-Jdk: 1.8.0_65
 Created-By: Maven Integration for Eclipse
 Implementation-Vendor: Pivotal Software, Inc.
+Main-Class: com.testbootconfigserver.ConfigServerApplication
 
