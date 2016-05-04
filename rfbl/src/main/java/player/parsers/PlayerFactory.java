@@ -16,7 +16,7 @@ public class PlayerFactory {
 	public Player getPlayer(){
 		Player player = new Player();
 		player.setMentions(new ArrayList<>());
-		ResourceRankPair pair = new ResourceRankPair(parser.getFile().split(".")[0], -1);
+		ResourceRankPair pair = new ResourceRankPair(parser.getFile().split("\\.")[0], -1);
 		player.getMentions().add(pair);
 		return player;
 	}

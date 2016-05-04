@@ -51,6 +51,7 @@ public class PlayerSearcher implements CommandLineRunner {
     	parsers.add(parser2);
     	
     	for (Parser parser : parsers){
+    		parser.parsePlayers();
     		List<Player> players = parser.getPlayers();
     		search(players);
     	}
@@ -71,6 +72,7 @@ public class PlayerSearcher implements CommandLineRunner {
         .queryParam("version", "3.0")
         .queryParam("free_agents_only", "1");
         
+        int rank = 1;
         players
         	.forEach(p -> {
         			builder.replaceQueryParam("name", p.getFullname().trim());
