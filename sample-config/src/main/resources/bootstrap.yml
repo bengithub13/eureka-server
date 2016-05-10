@@ -12,7 +12,7 @@ spring:
     config:
       server:
         svn:
-           uri: file:///C:/Users/bpooddny/bentestsvn
+           uri: file:///C:/svnrepo
            default-label: trunk
           
       health:
